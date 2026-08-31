@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Four Names Wheel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground: #F2F3F7;
+    --surface: #FFFFFF;
+    --line: #DCDFE7;
+    --ink: #101318;
+    --muted: #5C6270;
+    --brass-edge: #C98B2E;
+    --brass-deep: #8C6118;
+    --rim: #C9CDD8;
+    --hub: #FFFFFF;
+    --c-shubham: #C8443B;
+    --c-siddesh: #1F7A7A;
+    --c-ritesh: #5B4CC4;
+    --c-sanket: #B0701C;
+    --shadow: 0 1px 2px rgba(16,19,24,.06), 0 10px 28px -14px rgba(16,19,24,.28);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #101318;
+      --surface: #191D24;
+      --line: #2B313A;
+      --ink: #ECEEF2;
+      --muted: #8B93A3;
+      --brass-edge: #E0A82E;
+      --brass-deep: #A97C1C;
+      --rim: #333A44;
+      --hub: #1F242C;
+      --c-shubham: #E8695E;
+      --c-siddesh: #35A3A3;
+      --c-ritesh: #8B7BEE;
+      --c-sanket: #E0952F;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 34px -16px rgba(0,0,0,.75);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #101318;
+    --surface: #191D24;
+    --line: #2B313A;
+    --ink: #ECEEF2;
+    --muted: #8B93A3;
+    --brass-edge: #E0A82E;
+    --brass-deep: #A97C1C;
+    --rim: #333A44;
+    --hub: #1F242C;
+    --c-shubham: #E8695E;
+    --c-siddesh: #35A3A3;
+    --c-ritesh: #8B7BEE;
+    --c-sanket: #E0952F;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 34px -16px rgba(0,0,0,.75);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: clamp(20px, 5vw, 44px) clamp(16px, 5vw, 24px) 56px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 4vw, 28px);
+  }
+
+  header { display: flex; flex-direction: column; gap: 6px; }
+
+  .eyebrow {
+    font-family: "DM Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 8vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .sub { color: var(--muted); font-size: 14px; margin: 0; }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .stage canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #burst { pointer-events: none; }
+
+  .pointer {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    width: 26px;
+    height: 32px;
+    transform: translateX(-50%);
+    transform-origin: 50% 10%;
+    background: linear-gradient(160deg, var(--brass-edge), var(--brass-deep));
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,.3));
+    z-index: 2;
+  }
+
+  .pointer.kick { animation: kick .34s ease-out; }
+  @keyframes kick {
+    0%   { transform: translateX(-50%) rotate(0deg); }
+    35%  { transform: translateX(-50%) rotate(-13deg); }
+    70%  { transform: translateX(-50%) rotate(7deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+  }
+
+  .controls { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+  #spin {
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #17130A;
+    background: linear-gradient(178deg, #EFC067, #C98B2E 46%, #8C6118);
+    border: none;
+    border-radius: 999px;
+    padding: 15px 46px;
+    min-height: 52px;
+    width: 100%;
+    max-width: 300px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform .12s ease, filter .12s ease;
+  }
+  #spin:hover:not(:disabled) { filter: brightness(1.06); }
+  #spin:active:not(:disabled) { transform: translateY(1px) scale(.99); }
+  #spin:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  #spin:disabled { cursor: not-allowed; filter: saturate(.35) brightness(.94); }
+
+  .result {
+    margin: 0;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(19px, 5vw, 23px);
+    letter-spacing: -.01em;
+    color: var(--muted);
+  }
+  .result strong { color: var(--win, var(--ink)); font-weight: 800; }
+  .result.pop { animation: pop .45s cubic-bezier(.2,1.5,.4,1); }
+  @keyframes pop {
+    from { transform: scale(.86); opacity: .3; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .board {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 6px 16px 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .board h2 {
+    font-family: "DM Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+    padding: 12px 0 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+
+  .score {
+    display: grid;
+    grid-template-columns: 10px 1fr auto;
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 7px;
+    padding: 13px 0 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .score:last-child { border-bottom: none; padding-bottom: 4px; }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+  .who { font-weight: 500; font-size: 15px; }
+  .tally {
+    font-family: "DM Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--c);
+  }
+  .track {
+    grid-column: 1 / -1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    background: var(--c);
+    transition: width .5s cubic-bezier(.3,.9,.3,1);
+  }
+  .score.hit .who { color: var(--c); font-weight: 600; }
+  .score.hit { animation: flash .9s ease-out; }
+  @keyframes flash {
+    from { background: var(--flash); }
+    to   { background: transparent; }
+  }
+
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .foot span {
+    font-family: "DM Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  #reset {
+    font: inherit;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 15px;
+    min-height: 36px;
+    cursor: pointer;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  #reset:hover { color: var(--ink); border-color: var(--muted); }
+  #reset:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  .sr {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pointer.kick, .result.pop, .score.hit { animation: none; }
+    .fill { transition: none; }
+  }
+</style>
+
+</head>
+<body>
+<div class="page">
+  <header>
+    <p class="eyebrow">Random picker &middot; 4 names</p>
+    <h1>Four Names Wheel</h1>
+    <p class="sub">Every spin is drawn fresh from the browser&rsquo;s cryptographic randomness &mdash; no rotation, no order, no memory of the last result.</p>
+  </header>
+
+  <div class="stage">
+    <div class="pointer" id="pointer"></div>
+    <canvas id="wheel"></canvas>
+    <canvas id="burst"></canvas>
+  </div>
+
+  <div class="controls">
+    <button id="spin" type="button">Spin the wheel</button>
+    <p class="result" id="result" aria-hidden="true">Ready when you are.</p>
+    <p class="sr" id="live" role="status" aria-live="polite"></p>
+  </div>
+
+  <section class="board">
+    <h2>Scoreboard</h2>
+    <ol id="board"></ol>
+  </section>
+
+  <div class="foot">
+    <span id="total">0 spins</span>
+    <button id="reset" type="button">Reset scores</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var NAMES = [
+    { key: "shubham", label: "Shubham" },
+    { key: "siddesh", label: "Siddesh" },
+    { key: "ritesh",  label: "Ritesh"  },
+    { key: "sanket",  label: "Sanket"  }
+  ];
+
+  var SEG = (Math.PI * 2) / NAMES.length;
+  var STORE_KEY = "fourNamesWheel.counts.v1";
+
+  /* ---- persistence: localStorage, with an in-memory fallback ---- */
+
+  var memory = null;
+
+  function blank() {
+    var o = {};
+    NAMES.forEach(function (n) { o[n.key] = 0; });
+    return o;
+  }
+
+  function loadCounts() {
+    if (memory) return memory;
+    var loaded = blank();
+    try {
+      var raw = window.localStorage.getItem(STORE_KEY);
+      if (raw) {
+        var saved = JSON.parse(raw);
+        NAMES.forEach(function (n) {
+          var v = saved && saved[n.key];
+          if (typeof v === "number" && isFinite(v) && v >= 0) loaded[n.key] = Math.floor(v);
+        });
+      }
+    } catch (e) { /* storage blocked or corrupt: start clean */ }
+    memory = loaded;
+    return loaded;
+  }
+
+  function saveCounts() {
+    try { window.localStorage.setItem(STORE_KEY, JSON.stringify(memory)); }
+    catch (e) { /* the in-memory tally still holds */ }
+  }
+
+  var counts = loadCounts();
+
+  /* ---- unbiased randomness ---- */
+
+  function randomInt(n) {
+    var limit = Math.floor(4294967296 / n) * n;
+    var buf = new Uint32Array(1);
+    var v;
+    do { crypto.getRandomValues(buf); v = buf[0]; } while (v >= limit);
+    return v % n;
+  }
+
+  function randomUnit() {
+    var buf = new Uint32Array(1);
+    crypto.getRandomValues(buf);
+    return buf[0] / 4294967296;
+  }
+
+  function reducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  /* ---- theme-aware colours, read back from the CSS tokens ---- */
+
+  var css = getComputedStyle(document.documentElement);
+  function token(name) { return css.getPropertyValue(name).trim(); }
+  function colorOf(key) { return token("--c-" + key) || "#888888"; }
+
+  /* ---- wheel ---- */
+
+  var wheel = document.getElementById("wheel");
+  var wctx = wheel.getContext("2d");
+  var burst = document.getElementById("burst");
+  var bctx = burst.getContext("2d");
+  var stage = document.querySelector(".stage");
+
+  var size = 320;
+  var angle = randomUnit() * Math.PI * 2;
+
+  function fit() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var rect = stage.getBoundingClientRect();
+    size = Math.max(200, Math.round(rect.width));
+    [wheel, burst].forEach(function (c) {
+      c.width = Math.round(size * dpr);
+      c.height = Math.round(size * dpr);
+      c.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
+    });
+    drawWheel();
+  }
+
+  function drawWheel() {
+    var c = size / 2;
+    var r = c - 8;
+    wctx.clearRect(0, 0, size, size);
+
+    NAMES.forEach(function (n, i) {
+      var start = angle + i * SEG - Math.PI / 2;
+      wctx.beginPath();
+      wctx.moveTo(c, c);
+      wctx.arc(c, c, r, start, start + SEG);
+      wctx.closePath();
+      wctx.fillStyle = colorOf(n.key);
+      wctx.fill();
+
+      wctx.save();
+      wctx.translate(c, c);
+      wctx.rotate(start + SEG / 2);
+      wctx.textAlign = "right";
+      wctx.textBaseline = "middle";
+      wctx.fillStyle = "#FFFFFF";
+      wctx.font = "800 " + Math.round(size * 0.062) + "px 'Bricolage Grotesque', system-ui, sans-serif";
+      wctx.fillText(n.label, r - Math.round(size * 0.055), 0);
+      wctx.restore();
+    });
+
+    wctx.beginPath();
+    wctx.arc(c, c, r, 0, Math.PI * 2);
+    wctx.lineWidth = 6;
+    wctx.strokeStyle = token("--rim");
+    wctx.stroke();
+
+    wctx.beginPath();
+    wctx.arc(c, c, Math.max(20, size * 0.085), 0, Math.PI * 2);
+    wctx.fillStyle = token("--hub");
+    wctx.fill();
+    wctx.lineWidth = 3;
+    wctx.strokeStyle = token("--brass-edge");
+    wctx.stroke();
+  }
+
+  /* ---- confetti, in the winning name's colour ---- */
+
+  var bits = [];
+  var burstRunning = false;
+
+  function fireBurst(color) {
+    if (reducedMotion()) return;
+    bits = [];
+    for (var i = 0; i < 34; i++) {
+      var a = randomUnit() * Math.PI * 2;
+      var speed = 2.4 + randomUnit() * 4.4;
+      bits.push({
+        x: size / 2, y: size / 2,
+        vx: Math.cos(a) * speed,
+        vy: Math.sin(a) * speed - 2.2,
+        rot: randomUnit() * Math.PI,
+        vr: (randomUnit() - 0.5) * 0.34,
+        life: 1,
+        w: 4 + randomUnit() * 5,
+        h: 7 + randomUnit() * 7
+      });
+    }
+    if (!burstRunning) { burstRunning = true; stepBurst(color); }
+  }
+
+  function stepBurst(color) {
+    bctx.clearRect(0, 0, size, size);
+    var alive = false;
+    bctx.fillStyle = color;
+    bits.forEach(function (p) {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += 0.17;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.life -= 0.016;
+      bctx.save();
+      bctx.globalAlpha = Math.max(0, p.life);
+      bctx.translate(p.x, p.y);
+      bctx.rotate(p.rot);
+      bctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      bctx.restore();
+    });
+    if (alive) {
+      requestAnimationFrame(function () { stepBurst(color); });
+    } else {
+      bctx.clearRect(0, 0, size, size);
+      burstRunning = false;
+    }
+  }
+
+  /* ---- scoreboard ---- */
+
+  var board = document.getElementById("board");
+  var rows = {};
+
+  NAMES.forEach(function (n) {
+    var li = document.createElement("li");
+    li.className = "score";
+    li.innerHTML =
+      '<span class="dot"></span>' +
+      '<span class="who">' + n.label + '</span>' +
+      '<span class="tally">0</span>' +
+      '<span class="track"><span class="fill"></span></span>';
+    board.appendChild(li);
+    rows[n.key] = {
+      li: li,
+      tally: li.querySelector(".tally"),
+      fill: li.querySelector(".fill")
+    };
+  });
+
+  function renderBoard() {
+    var total = 0;
+    var peak = 0;
+    NAMES.forEach(function (n) {
+      total += counts[n.key];
+      peak = Math.max(peak, counts[n.key]);
+    });
+
+    NAMES.forEach(function (n) {
+      var row = rows[n.key];
+      var color = colorOf(n.key);
+      row.li.style.setProperty("--c", color);
+      row.li.style.setProperty("--flash", color + "22");
+      row.tally.textContent = counts[n.key];
+      row.fill.style.width = peak ? (counts[n.key] / peak * 100) + "%" : "0%";
+    });
+
+    document.getElementById("total").textContent =
+      total === 1 ? "1 spin" : total + " spins";
+  }
+
+  /* ---- spinning ---- */
+
+  var spinBtn = document.getElementById("spin");
+  var resultEl = document.getElementById("result");
+  var liveEl = document.getElementById("live");
+  var pointer = document.getElementById("pointer");
+  var spinning = false;
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3.2); }
+
+  function spin() {
+    if (spinning) return;
+    spinning = true;
+    spinBtn.disabled = true;
+    spinBtn.textContent = "Spinning...";
+    resultEl.classList.remove("pop");
+    NAMES.forEach(function (n) { rows[n.key].li.classList.remove("hit"); });
+
+    // 1. Draw the winner first, independently of everything that came before.
+    var pick = randomInt(NAMES.length);
+    var winner = NAMES[pick];
+
+    // 2. Then solve for the rotation that parks that wedge under the pointer.
+    //    A point drawn at local angle L sits under the pointer when L === -angle.
+    var within = 0.14 + randomUnit() * 0.72;
+    var target = (Math.PI * 2 - ((pick + within) * SEG)) % (Math.PI * 2);
+    var current = ((angle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    var delta = (target - current + Math.PI * 2) % (Math.PI * 2);
+    var travel = (4 + randomInt(3)) * Math.PI * 2 + delta;
+    var from = angle;
+    var duration = reducedMotion() ? 320 : 3600 + randomUnit() * 900;
+    var t0 = null;
+
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var t = Math.min(1, (ts - t0) / duration);
+      angle = from + travel * easeOut(t);
+      drawWheel();
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        angle = from + travel;
+        drawWheel();
+        land(winner);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function land(winner) {
+    counts[winner.key] += 1;
+    saveCounts();
+    renderBoard();
+
+    var color = colorOf(winner.key);
+    resultEl.style.setProperty("--win", color);
+    resultEl.innerHTML = "It&rsquo;s <strong>" + winner.label + "</strong>";
+    liveEl.textContent = winner.label + " was picked, and now has " +
+      counts[winner.key] + (counts[winner.key] === 1 ? " pick." : " picks.");
+
+    void resultEl.offsetWidth;
+    resultEl.classList.add("pop");
+    pointer.classList.remove("kick");
+    void pointer.offsetWidth;
+    pointer.classList.add("kick");
+    rows[winner.key].li.classList.add("hit");
+
+    fireBurst(color);
+
+    spinning = false;
+    spinBtn.disabled = false;
+    spinBtn.textContent = "Spin again";
+  }
+
+  spinBtn.addEventListener("click", spin);
+
+  document.getElementById("reset").addEventListener("click", function () {
+    memory = blank();
+    counts = memory;
+    saveCounts();
+    renderBoard();
+    NAMES.forEach(function (n) { rows[n.key].li.classList.remove("hit"); });
+    resultEl.style.removeProperty("--win");
+    resultEl.textContent = "Scores cleared. Ready when you are.";
+    liveEl.textContent = "Scores cleared.";
+    spinBtn.textContent = "Spin the wheel";
+  });
+
+  window.addEventListener("resize", fit);
+
+  var dark = window.matchMedia("(prefers-color-scheme: dark)");
+  function onThemeChange() {
+    css = getComputedStyle(document.documentElement);
+    drawWheel();
+    renderBoard();
+  }
+  if (dark.addEventListener) dark.addEventListener("change", onThemeChange);
+  else if (dark.addListener) dark.addListener(onThemeChange);
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { drawWheel(); });
+  }
+
+  fit();
+  renderBoard();
+})();
+</script>
+</body>
+</html>
