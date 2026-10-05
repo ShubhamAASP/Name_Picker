@@ -3,668 +3,553 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Four Names Wheel</title>
+<meta name="description" content="Paradise Group — real estate developers building thoughtfully designed homes and commercial spaces.">
+<title>Paradise Group | Builders &amp; Developers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
 <style>
   :root {
-    --ground: #F2F3F7;
+    --ink: #13201C;
+    --ink-soft: #4A5753;
+    --ground: #F7F4EE;
     --surface: #FFFFFF;
-    --line: #DCDFE7;
-    --ink: #101318;
-    --muted: #5C6270;
-    --brass-edge: #C98B2E;
-    --brass-deep: #8C6118;
-    --rim: #C9CDD8;
-    --hub: #FFFFFF;
-    --c-shubham: #C8443B;
-    --c-siddesh: #1F7A7A;
-    --c-ritesh: #5B4CC4;
-    --c-sanket: #B0701C;
-    --shadow: 0 1px 2px rgba(16,19,24,.06), 0 10px 28px -14px rgba(16,19,24,.28);
+    --line: #E4DED2;
+    --green: #1E4D40;
+    --green-deep: #12332A;
+    --gold: #C49A4A;
+    --gold-soft: #F1E6CF;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(19,32,28,.06), 0 18px 40px -22px rgba(19,32,28,.35);
+    --max: 1180px;
   }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Inter", system-ui, sans-serif; color: var(--ink); background: var(--ground); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 1.1; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+  section { padding: 96px 0; }
+  .eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; }
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head h2 { font-size: clamp(34px, 4.5vw, 50px); margin-bottom: 14px; }
+  .section-head p { color: var(--ink-soft); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid transparent; cursor: pointer; transition: transform .2s, background .2s, color .2s; font-family: inherit; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-gold { background: var(--gold); color: #fff; }
+  .btn-gold:hover { background: #b0873a; }
+  .btn-ghost { border-color: rgba(255,255,255,.55); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ground: #101318;
-      --surface: #191D24;
-      --line: #2B313A;
-      --ink: #ECEEF2;
-      --muted: #8B93A3;
-      --brass-edge: #E0A82E;
-      --brass-deep: #A97C1C;
-      --rim: #333A44;
-      --hub: #1F242C;
-      --c-shubham: #E8695E;
-      --c-siddesh: #35A3A3;
-      --c-ritesh: #8B7BEE;
-      --c-sanket: #E0952F;
-      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 34px -16px rgba(0,0,0,.75);
-    }
+  /* Header */
+  header { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s, box-shadow .3s; }
+  header.scrolled { background: rgba(18,51,42,.96); backdrop-filter: blur(8px); box-shadow: 0 6px 24px -12px rgba(0,0,0,.4); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .logo { display: flex; align-items: center; gap: 10px; color: #fff; }
+  .logo-mark { width: 38px; height: 38px; }
+  .logo-text { font-family: "Cormorant Garamond", serif; font-size: 24px; font-weight: 700; letter-spacing: .02em; line-height: 1; }
+  .logo-text small { display: block; font-family: "Inter", sans-serif; font-size: 9.5px; letter-spacing: .32em; font-weight: 500; color: var(--gold); margin-top: 3px; }
+  .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,.85); font-size: 14.5px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links .btn { padding: 10px 20px; color: #fff; }
+  .menu-btn { display: none; background: none; border: 0; color: #fff; cursor: pointer; padding: 6px; }
+
+  /* Hero */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; color: #fff; overflow: hidden; padding: 120px 0 80px;
+    background: linear-gradient(115deg, rgba(18,51,42,.96) 0%, rgba(18,51,42,.82) 45%, rgba(18,51,42,.35) 100%), linear-gradient(180deg, #2c6656, #12332a); }
+  .hero-skyline { position: absolute; right: 0; bottom: 0; width: min(46vw, 640px); opacity: .9; pointer-events: none; }
+  .hero > .wrap { width: 100%; }
+  .hero-content { position: relative; max-width: 600px; }
+  .hero h1 { font-size: clamp(44px, 7vw, 84px); margin-bottom: 22px; }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero p { font-size: 18px; color: rgba(255,255,255,.82); margin-bottom: 36px; max-width: 520px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* Stats */
+  .stats { margin-top: -60px; position: relative; z-index: 2; padding: 0; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .stat { padding: 34px 24px; text-align: center; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: 0; }
+  .stat strong { display: block; font-family: "Cormorant Garamond", serif; font-size: 46px; color: var(--green); line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13.5px; color: var(--ink-soft); }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .about-visual { position: relative; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; background: linear-gradient(160deg, #d9c9a3, #1e4d40); box-shadow: var(--shadow); }
+  .about-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .about-badge { position: absolute; left: 24px; bottom: 24px; background: var(--surface); padding: 18px 22px; border-radius: 12px; box-shadow: var(--shadow); }
+  .about-badge strong { font-family: "Cormorant Garamond", serif; font-size: 34px; color: var(--green); display: block; line-height: 1; }
+  .about-badge span { font-size: 13px; color: var(--ink-soft); }
+  .about-copy h2 { font-size: clamp(34px, 4.5vw, 50px); margin-bottom: 20px; }
+  .about-copy p { color: var(--ink-soft); margin-bottom: 18px; }
+  .checks { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; margin: 26px 0 32px; }
+  .checks li { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; font-size: 15px; }
+  .checks svg { flex: none; margin-top: 3px; color: var(--gold); }
+  .about-copy .btn-gold { color: #fff; }
+
+  /* Projects */
+  #projects { background: var(--surface); }
+  .proj-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+  .proj-top .section-head { margin-bottom: 0; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter { padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line); background: transparent; font: inherit; font-size: 14px; font-weight: 500; color: var(--ink-soft); cursor: pointer; transition: all .2s; }
+  .filter:hover { border-color: var(--green); color: var(--green); }
+  .filter.active { background: var(--green); border-color: var(--green); color: #fff; }
+  .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .card { background: var(--ground); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); transition: transform .3s, box-shadow .3s; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .card.hide { display: none; }
+  .card-img { position: relative; aspect-ratio: 16/11; overflow: hidden; }
+  .card-img svg { width: 100%; height: 100%; }
+  .tag { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.95); color: var(--green); padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .tag.done { background: var(--green); color: #fff; }
+  .card-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .card-body h3 { font-size: 27px; margin-bottom: 4px; }
+  .loc { font-size: 14px; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+  .specs { display: flex; gap: 18px; font-size: 13.5px; color: var(--ink-soft); padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 18px; flex-wrap: wrap; }
+  .specs b { color: var(--ink); font-weight: 600; }
+  .card-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+  .price { font-family: "Cormorant Garamond", serif; font-size: 24px; font-weight: 700; color: var(--green); }
+  .price small { font-family: "Inter", sans-serif; font-size: 12px; font-weight: 400; color: var(--ink-soft); display: block; }
+  .link-arrow { font-weight: 600; font-size: 14px; color: var(--gold); display: inline-flex; gap: 6px; align-items: center; }
+  .link-arrow:hover { gap: 10px; }
+
+  /* Amenities */
+  .amen-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .amen { background: var(--surface); padding: 30px 24px; border-radius: var(--radius); border: 1px solid var(--line); transition: border-color .2s, transform .2s; }
+  .amen:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .amen-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--gold-soft); color: var(--green); display: grid; place-items: center; margin-bottom: 18px; }
+  .amen h3 { font-family: "Inter", sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .amen p { font-size: 14px; color: var(--ink-soft); }
+
+  /* Process */
+  #process { background: var(--green-deep); color: #fff; }
+  #process .section-head p { color: rgba(255,255,255,.7); }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: step; }
+  .step { position: relative; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); }
+  .step::before { counter-increment: step; content: "0" counter(step); font-family: "Cormorant Garamond", serif; font-size: 44px; color: var(--gold); display: block; line-height: 1; margin-bottom: 14px; }
+  .step h3 { font-family: "Inter", sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .step p { font-size: 14.5px; color: rgba(255,255,255,.7); }
+
+  /* CTA band */
+  .cta { padding: 0; margin-top: -1px; }
+  .cta-box { background: linear-gradient(120deg, var(--gold), #a77d33); border-radius: var(--radius); padding: 52px 56px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; transform: translateY(50%); box-shadow: var(--shadow); }
+  .cta-box h2 { font-size: clamp(28px, 3.6vw, 40px); max-width: 560px; }
+  .cta-box .btn { background: #fff; color: var(--green-deep); }
+
+  /* Contact */
+  #contact { padding-top: 180px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; }
+  .info-item { display: flex; gap: 16px; margin-bottom: 26px; }
+  .info-item .amen-icon { margin: 0; width: 46px; height: 46px; flex: none; }
+  .info-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .info-item p, .info-item a { font-size: 14.5px; color: var(--ink-soft); }
+  form { background: var(--surface); padding: 36px; border-radius: var(--radius); box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  label { font-size: 13px; font-weight: 600; }
+  input, select, textarea { font: inherit; font-size: 15px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--ground); color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(30,77,64,.12); }
+  textarea { resize: vertical; min-height: 110px; }
+  form .btn { justify-content: center; grid-column: 1 / -1; }
+  .form-note { grid-column: 1 / -1; font-size: 14px; color: var(--green); font-weight: 500; display: none; background: #E6F0EC; padding: 12px 14px; border-radius: 10px; }
+  .form-note.show { display: block; }
+
+  /* Footer */
+  footer { background: var(--green-deep); color: rgba(255,255,255,.7); padding: 64px 0 28px; margin-top: 96px; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.12); }
+  .foot-grid p { font-size: 14px; margin-top: 16px; max-width: 300px; }
+  .foot-grid h5 { color: #fff; font-size: 14px; font-weight: 600; margin-bottom: 16px; letter-spacing: .04em; }
+  .foot-grid ul { list-style: none; display: grid; gap: 10px; font-size: 14px; }
+  .foot-grid a:hover { color: var(--gold); }
+  .foot-bottom { display: flex; justify-content: space-between; padding-top: 24px; font-size: 13px; flex-wrap: wrap; gap: 10px; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-skyline { opacity: .3; width: 70vw; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .proj-grid { grid-template-columns: 1fr 1fr; }
+    .amen-grid, .steps { grid-template-columns: 1fr 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .about-visual { aspect-ratio: 16/11; }
   }
-
-  :root[data-theme="dark"] {
-    --ground: #101318;
-    --surface: #191D24;
-    --line: #2B313A;
-    --ink: #ECEEF2;
-    --muted: #8B93A3;
-    --brass-edge: #E0A82E;
-    --brass-deep: #A97C1C;
-    --rim: #333A44;
-    --hub: #1F242C;
-    --c-shubham: #E8695E;
-    --c-siddesh: #35A3A3;
-    --c-ritesh: #8B7BEE;
-    --c-sanket: #E0952F;
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 34px -16px rgba(0,0,0,.75);
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--ground);
-    color: var(--ink);
-    font-family: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .page {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: clamp(20px, 5vw, 44px) clamp(16px, 5vw, 24px) 56px;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(20px, 4vw, 28px);
-  }
-
-  header { display: flex; flex-direction: column; gap: 6px; }
-
-  .eyebrow {
-    font-family: "DM Mono", ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0;
-  }
-
-  h1 {
-    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 800;
-    font-size: clamp(28px, 8vw, 38px);
-    line-height: 1.05;
-    letter-spacing: -.02em;
-    margin: 0;
-    text-wrap: balance;
-  }
-
-  .sub { color: var(--muted); font-size: 14px; margin: 0; }
-
-  .stage {
-    position: relative;
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-    aspect-ratio: 1 / 1;
-  }
-
-  .stage canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  #burst { pointer-events: none; }
-
-  .pointer {
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    width: 26px;
-    height: 32px;
-    transform: translateX(-50%);
-    transform-origin: 50% 10%;
-    background: linear-gradient(160deg, var(--brass-edge), var(--brass-deep));
-    clip-path: polygon(50% 100%, 0 0, 100% 0);
-    filter: drop-shadow(0 3px 5px rgba(0,0,0,.3));
-    z-index: 2;
-  }
-
-  .pointer.kick { animation: kick .34s ease-out; }
-  @keyframes kick {
-    0%   { transform: translateX(-50%) rotate(0deg); }
-    35%  { transform: translateX(-50%) rotate(-13deg); }
-    70%  { transform: translateX(-50%) rotate(7deg); }
-    100% { transform: translateX(-50%) rotate(0deg); }
-  }
-
-  .controls { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-
-  #spin {
-    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 800;
-    font-size: 17px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: #17130A;
-    background: linear-gradient(178deg, #EFC067, #C98B2E 46%, #8C6118);
-    border: none;
-    border-radius: 999px;
-    padding: 15px 46px;
-    min-height: 52px;
-    width: 100%;
-    max-width: 300px;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: transform .12s ease, filter .12s ease;
-  }
-  #spin:hover:not(:disabled) { filter: brightness(1.06); }
-  #spin:active:not(:disabled) { transform: translateY(1px) scale(.99); }
-  #spin:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-  #spin:disabled { cursor: not-allowed; filter: saturate(.35) brightness(.94); }
-
-  .result {
-    margin: 0;
-    min-height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 600;
-    font-size: clamp(19px, 5vw, 23px);
-    letter-spacing: -.01em;
-    color: var(--muted);
-  }
-  .result strong { color: var(--win, var(--ink)); font-weight: 800; }
-  .result.pop { animation: pop .45s cubic-bezier(.2,1.5,.4,1); }
-  @keyframes pop {
-    from { transform: scale(.86); opacity: .3; }
-    to   { transform: scale(1); opacity: 1; }
-  }
-
-  .board {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 6px 16px 14px;
-    box-shadow: var(--shadow);
-  }
-
-  .board h2 {
-    font-family: "DM Mono", ui-monospace, monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0;
-    padding: 12px 0 10px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-
-  .score {
-    display: grid;
-    grid-template-columns: 10px 1fr auto;
-    align-items: center;
-    column-gap: 12px;
-    row-gap: 7px;
-    padding: 13px 0 12px;
-    border-bottom: 1px solid var(--line);
-  }
-  .score:last-child { border-bottom: none; padding-bottom: 4px; }
-
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
-  .who { font-weight: 500; font-size: 15px; }
-  .tally {
-    font-family: "DM Mono", ui-monospace, monospace;
-    font-variant-numeric: tabular-nums;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--c);
-  }
-  .track {
-    grid-column: 1 / -1;
-    height: 4px;
-    border-radius: 2px;
-    background: var(--line);
-    overflow: hidden;
-  }
-  .fill {
-    display: block;
-    height: 100%;
-    width: 0;
-    border-radius: 2px;
-    background: var(--c);
-    transition: width .5s cubic-bezier(.3,.9,.3,1);
-  }
-  .score.hit .who { color: var(--c); font-weight: 600; }
-  .score.hit { animation: flash .9s ease-out; }
-  @keyframes flash {
-    from { background: var(--flash); }
-    to   { background: transparent; }
-  }
-
-  .foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .foot span {
-    font-family: "DM Mono", ui-monospace, monospace;
-    font-variant-numeric: tabular-nums;
-  }
-
-  #reset {
-    font: inherit;
-    color: var(--muted);
-    background: none;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 7px 15px;
-    min-height: 36px;
-    cursor: pointer;
-    transition: color .15s ease, border-color .15s ease;
-  }
-  #reset:hover { color: var(--ink); border-color: var(--muted); }
-  #reset:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-
-  .sr {
-    position: absolute; width: 1px; height: 1px;
-    padding: 0; margin: -1px; overflow: hidden;
-    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .pointer.kick, .result.pop, .score.hit { animation: none; }
-    .fill { transition: none; }
+  @media (max-width: 760px) {
+    section { padding: 72px 0; }
+    .menu-btn { display: block; }
+    .nav-links { position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--green-deep); padding: 8px 20px 20px; display: none; }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .nav-links .btn { margin-top: 12px; justify-content: center; border: 0; }
+    .hero-skyline { width: 120vw; opacity: .35; }
+    .proj-grid, .amen-grid, .steps, .checks { grid-template-columns: 1fr; }
+    form { grid-template-columns: 1fr; padding: 24px; }
+    .cta-box { padding: 36px 28px; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .stat strong { font-size: 38px; }
   }
 </style>
-
 </head>
-  
-<body>
-<div class="page">
-  <header>
-    <p class="eyebrow">Random picker &middot; 4 names</p>
-    <h1>Four Names Wheel</h1>
-    <p class="sub">Every spin is drawn fresh from the browser&rsquo;s cryptographic randomness &mdash; no rotation, no order, no memory of the last result.</p>
-  </header>
-
-  <div class="stage">
-    <div class="pointer" id="pointer"></div>
-    <canvas id="wheel"></canvas>
-    <canvas id="burst"></canvas>
-  </div>
-
-  <div class="controls">
-    <button id="spin" type="button">Spin the wheel</button>
-    <p class="result" id="result" aria-hidden="true">Ready when you are.</p>
-    <p class="sr" id="live" role="status" aria-live="polite"></p>
-  </div>
-
-  <section class="board">
-    <h2>Scoreboard</h2>
-    <ol id="board"></ol>
-  </section>
-
-  <div class="foot">
-    <span id="total">0 spins</span>
-    <button id="reset" type="button">Reset scores</button>
-  </div>
-</div>
 <script src="https://app.quvix.io/widget.js" data-quvix-widget="wgt_AX7VqwdziiGlJGZNWl8a03GlVbstc5Oo" data-quvix-color="#6366f1" data-quvix-position="right" data-quvix-scheme="light"></script>
+<body>
+
+<!-- Reusable building illustration -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="win" width="14" height="18" patternUnits="userSpaceOnUse">
+      <rect x="3" y="4" width="8" height="10" rx="1" fill="#F1E6CF" opacity=".85"/>
+    </pattern>
+    <pattern id="winDim" width="14" height="18" patternUnits="userSpaceOnUse">
+      <rect x="3" y="4" width="8" height="10" rx="1" fill="#fff" opacity=".25"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="Paradise Group home">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none">
+        <path d="M20 3 37 15v22H3V15L20 3Z" stroke="#C49A4A" stroke-width="2.2"/>
+        <path d="M13 37V22h14v15" stroke="#C49A4A" stroke-width="2.2"/>
+        <path d="M20 22v15" stroke="#C49A4A" stroke-width="1.6"/>
+      </svg>
+      <span class="logo-text">PARADISE<small>GROUP</small></span>
+    </a>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#process">How We Build</a></li>
+      <li><a href="#contact" class="btn btn-gold">Book a Site Visit</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="hero-skyline" viewBox="0 0 820 560" fill="none" aria-hidden="true">
+    <rect x="40" y="250" width="110" height="310" fill="#1E4D40"/><rect x="40" y="250" width="110" height="310" fill="url(#winDim)"/>
+    <rect x="170" y="120" width="140" height="440" fill="#2A5E50"/><rect x="170" y="120" width="140" height="440" fill="url(#win)"/>
+    <rect x="232" y="70" width="16" height="50" fill="#C49A4A"/>
+    <rect x="330" y="200" width="120" height="360" fill="#1E4D40"/><rect x="330" y="200" width="120" height="360" fill="url(#winDim)"/>
+    <rect x="470" y="40" width="150" height="520" fill="#24584A"/><rect x="470" y="40" width="150" height="520" fill="url(#win)"/>
+    <path d="M470 40 545 0l75 40z" fill="#C49A4A"/>
+    <rect x="640" y="280" width="140" height="280" fill="#1E4D40"/><rect x="640" y="280" width="140" height="280" fill="url(#winDim)"/>
+    <rect x="0" y="552" width="820" height="8" fill="#C49A4A" opacity=".6"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-content reveal">
+      <p class="eyebrow">Builders &amp; Developers</p>
+      <h1>Homes built for a <em>lifetime</em> of living.</h1>
+      <p>Paradise Group designs and builds residences and commercial spaces with honest construction, on-time delivery and transparent pricing — from the first brick to the day you get your keys.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-gold">Explore Projects
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost">Talk to Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid reveal">
+      <div class="stat"><strong data-count="25">0</strong><span>Years of Experience</span></div>
+      <div class="stat"><strong data-count="40" data-suffix="+">0</strong><span>Projects Delivered</span></div>
+      <div class="stat"><strong data-count="3500" data-suffix="+">0</strong><span>Happy Families</span></div>
+      <div class="stat"><strong data-count="6" data-suffix="M+">0</strong><span>Sq. Ft. Constructed</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-visual reveal">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <circle cx="300" cy="110" r="46" fill="#F1E6CF" opacity=".7"/>
+        <rect x="60" y="160" width="170" height="340" fill="#1E4D40"/><rect x="60" y="160" width="170" height="340" fill="url(#win)"/>
+        <rect x="230" y="240" width="120" height="260" fill="#12332A"/><rect x="230" y="240" width="120" height="260" fill="url(#winDim)"/>
+        <path d="M50 160h190l-20-24H70z" fill="#C49A4A"/>
+        <rect x="0" y="470" width="400" height="30" fill="#12332A"/>
+        <circle cx="30" cy="450" r="26" fill="#2E6B57"/><circle cx="375" cy="455" r="22" fill="#2E6B57"/>
+      </svg>
+      <div class="about-badge"><strong>RERA</strong><span>Registered projects</span></div>
+    </div>
+    <div class="about-copy reveal">
+      <p class="eyebrow">About Paradise Group</p>
+      <h2>Building trust, one landmark at a time.</h2>
+      <p>For over two decades, Paradise Group has shaped skylines with residential towers, villas and commercial hubs that balance smart design with lasting quality.</p>
+      <p>Every project is planned around how people actually live — natural light, ventilation, green open spaces and everyday convenience — and backed by clear documentation and legal approvals.</p>
+      <ul class="checks">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>On-time possession</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>Clear legal titles</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>Premium materials</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>Bank loan assistance</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>Earthquake-resistant</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>Transparent pricing</li>
+      </ul>
+      <a href="#contact" class="btn btn-gold">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="proj-top">
+      <div class="section-head reveal">
+        <p class="eyebrow">Our Projects</p>
+        <h2>Spaces designed around you.</h2>
+        <p>From compact city apartments to spacious villas and business addresses — find the Paradise home that fits your life.</p>
+      </div>
+      <div class="filters reveal" role="tablist" aria-label="Filter projects">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="ongoing">Ongoing</button>
+        <button class="filter" data-filter="upcoming">Upcoming</button>
+        <button class="filter" data-filter="completed">Completed</button>
+      </div>
+    </div>
+    <div class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+<section id="amenities">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Lifestyle Amenities</p>
+      <h2>Everything you need, right at home.</h2>
+      <p>Thoughtful amenities across our communities that make everyday life healthier, safer and more connected.</p>
+    </div>
+    <div class="amen-grid">
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 18c2 0 2-1.5 4-1.5S8 18 10 18s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M2 22c2 0 2-1.5 4-1.5S8 22 10 22s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M8 15V5a2 2 0 0 1 4 0M16 15V5a2 2 0 0 0-4 0M8 9h8"/></svg></div><h3>Swimming Pool</h3><p>Temperature-friendly pool with a dedicated kids' zone.</p></div>
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></svg></div><h3>Fitness Centre</h3><p>Fully equipped gym with yoga and aerobics studio.</p></div>
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12M12 12c0-4 3-7 7-7 0 4-3 7-7 7ZM12 15c0-3-2.5-5.5-6-5.5 0 3.5 2.5 5.5 6 5.5Z"/></svg></div><h3>Landscaped Gardens</h3><p>Green open spaces, walking tracks and seating decks.</p></div>
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>24×7 Security</h3><p>CCTV surveillance, intercom and gated entry.</p></div>
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18M3 12h18"/></svg></div><h3>Clubhouse</h3><p>Party hall, indoor games and community lounge.</p></div>
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div><h3>Power Backup</h3><p>Backup for common areas, lifts and essential points.</p></div>
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 20c0-2 1-4 3-4s3 2 3 4"/></svg></div><h3>Kids' Play Area</h3><p>Safe, soft-floored play zones for little ones.</p></div>
+      <div class="amen reveal"><div class="amen-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="6" rx="2"/><path d="M5 11l2-5h10l2 5M7 17v2M17 17v2"/></svg></div><h3>Covered Parking</h3><p>Dedicated parking with EV charging points.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">How We Build</p>
+      <h2>A simple journey to your new home.</h2>
+      <p>We keep you informed at every stage, so buying a home feels clear and stress-free.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Visit &amp; Explore</h3><p>Tour our sample flats and project sites with a dedicated relationship manager.</p></div>
+      <div class="step reveal"><h3>Choose &amp; Book</h3><p>Select your unit, review cost sheets and agreements, and book with confidence.</p></div>
+      <div class="step reveal"><h3>Track Construction</h3><p>Receive regular progress updates and photos as your home takes shape.</p></div>
+      <div class="step reveal"><h3>Move In</h3><p>Final inspection, registration and handover — welcome home.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Ready to find your dream home? Schedule a free site visit today.</h2>
+      <a href="#contact" class="btn">Book a Site Visit</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="section-head">
+        <p class="eyebrow">Contact Us</p>
+        <h2>Let's talk about your next home.</h2>
+        <p>Share a few details and our sales team will get back to you within one working day.</p>
+      </div>
+      <div class="info-item"><div class="amen-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><h4>Corporate Office</h4><p>Paradise House, Main Road, Your City – 000000</p></div></div>
+      <div class="info-item"><div class="amen-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></div><div><h4>Call Us</h4><a href="tel:+910000000000">+91 00000 00000</a></div></div>
+      <div class="info-item"><div class="amen-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><div><h4>Email</h4><a href="mailto:sales@paradisegroup.example">sales@paradisegroup.example</a></div></div>
+      <div class="info-item"><div class="amen-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h4>Site Visits</h4><p>Mon – Sun, 10:00 AM – 7:00 PM</p></div></div>
+    </div>
+    <form id="enquiry" class="reveal" novalidate>
+      <div class="field"><label for="name">Full Name</label><input id="name" name="name" required placeholder="Your name"></div>
+      <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required placeholder="10-digit mobile" pattern="[0-9+\s-]{10,15}"></div>
+      <div class="field full"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com"></div>
+      <div class="field"><label for="project">Interested In</label>
+        <select id="project" name="project"><option value="">Select a project</option></select>
+      </div>
+      <div class="field"><label for="budget">Budget</label>
+        <select id="budget" name="budget">
+          <option>Under ₹50 Lakh</option><option>₹50 L – ₹1 Cr</option><option>₹1 Cr – ₹2 Cr</option><option>Above ₹2 Cr</option>
+        </select>
+      </div>
+      <div class="field full"><label for="msg">Message</label><textarea id="msg" name="msg" placeholder="Tell us what you're looking for…"></textarea></div>
+      <button class="btn btn-gold" type="submit">Send Enquiry</button>
+      <p class="form-note" id="formNote" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none"><path d="M20 3 37 15v22H3V15L20 3Z" stroke="#C49A4A" stroke-width="2.2"/><path d="M13 37V22h14v15" stroke="#C49A4A" stroke-width="2.2"/><path d="M20 22v15" stroke="#C49A4A" stroke-width="1.6"/></svg>
+          <span class="logo-text">PARADISE<small>GROUP</small></span>
+        </a>
+        <p>Builders and developers of residential and commercial spaces crafted for comfort, quality and lasting value.</p>
+      </div>
+      <div><h5>Company</h5><ul><li><a href="#about">About Us</a></li><li><a href="#process">How We Build</a></li><li><a href="#contact">Careers</a></li></ul></div>
+      <div><h5>Projects</h5><ul><li><a href="#projects" data-jump="ongoing">Ongoing</a></li><li><a href="#projects" data-jump="upcoming">Upcoming</a></li><li><a href="#projects" data-jump="completed">Completed</a></li></ul></div>
+      <div><h5>Support</h5><ul><li><a href="#contact">Book a Visit</a></li><li><a href="#contact">Home Loans</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Paradise Group. All rights reserved.</span>
+      <span>Images are illustrative. Prices and specifications are indicative and subject to change.</span>
+    </div>
+  </div>
+</footer>
+
 <script>
-(function () {
-  "use strict";
-
-  var NAMES = [
-    { key: "shubham", label: "Shubham" },
-    { key: "siddesh", label: "Siddesh" },
-    { key: "ritesh",  label: "Ritesh"  },
-    { key: "sanket",  label: "Sanket"  }
+  // ---- Project data (edit here) ----
+  const projects = [
+    { name: "Paradise Heights", loc: "City Centre", status: "ongoing", type: "2 & 3 BHK Apartments", area: "950–1,450 sq.ft", floors: "G+22", price: "₹78 L*", colors: ["#2A5E50", "#C49A4A"], h: [150, 110, 130] },
+    { name: "Paradise Greens", loc: "Lakeside", status: "ongoing", type: "3 & 4 BHK Villas", area: "2,100–3,200 sq.ft", floors: "G+2", price: "₹1.85 Cr*", colors: ["#3D6E4F", "#E3C98F"], h: [70, 80, 60], villa: true },
+    { name: "Paradise Business Bay", loc: "IT Corridor", status: "upcoming", type: "Offices & Retail", area: "500–5,000 sq.ft", floors: "G+14", price: "₹95 L*", colors: ["#1F4A5A", "#C49A4A"], h: [120, 160, 100] },
+    { name: "Paradise Residency", loc: "Old Town", status: "completed", type: "1 & 2 BHK Apartments", area: "620–980 sq.ft", floors: "G+12", price: "Sold Out", colors: ["#4B5E3A", "#D9B46A"], h: [110, 120, 95] },
+    { name: "Paradise Skyline", loc: "Riverside", status: "upcoming", type: "3 & 4 BHK Luxury", area: "1,800–2,900 sq.ft", floors: "G+30", price: "₹2.4 Cr*", colors: ["#283E5A", "#E1BE76"], h: [175, 140, 120] },
+    { name: "Paradise Gardens", loc: "Highway Belt", status: "completed", type: "2 BHK Apartments", area: "850–1,050 sq.ft", floors: "G+9", price: "Ready to Move", colors: ["#5A4632", "#E3C98F"], h: [90, 100, 85] },
   ];
+  const statusLabel = { ongoing: "Ongoing", upcoming: "Upcoming", completed: "Completed" };
 
-  var SEG = (Math.PI * 2) / NAMES.length;
-  var STORE_KEY = "fourNamesWheel.counts.v1";
-
-  /* ---- persistence: localStorage, with an in-memory fallback ---- */
-
-  var memory = null;
-
-  function blank() {
-    var o = {};
-    NAMES.forEach(function (n) { o[n.key] = 0; });
-    return o;
-  }
-
-  function loadCounts() {
-    if (memory) return memory;
-    var loaded = blank();
-    try {
-      var raw = window.localStorage.getItem(STORE_KEY);
-      if (raw) {
-        var saved = JSON.parse(raw);
-        NAMES.forEach(function (n) {
-          var v = saved && saved[n.key];
-          if (typeof v === "number" && isFinite(v) && v >= 0) loaded[n.key] = Math.floor(v);
-        });
-      }
-    } catch (e) { /* storage blocked or corrupt: start clean */ }
-    memory = loaded;
-    return loaded;
-  }
-
-  function saveCounts() {
-    try { window.localStorage.setItem(STORE_KEY, JSON.stringify(memory)); }
-    catch (e) { /* the in-memory tally still holds */ }
-  }
-
-  var counts = loadCounts();
-
-  /* ---- unbiased randomness ---- */
-
-  function randomInt(n) {
-    var limit = Math.floor(4294967296 / n) * n;
-    var buf = new Uint32Array(1);
-    var v;
-    do { crypto.getRandomValues(buf); v = buf[0]; } while (v >= limit);
-    return v % n;
-  }
-
-  function randomUnit() {
-    var buf = new Uint32Array(1);
-    crypto.getRandomValues(buf);
-    return buf[0] / 4294967296;
-  }
-
-  function reducedMotion() {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }
-
-  /* ---- theme-aware colours, read back from the CSS tokens ---- */
-
-  var css = getComputedStyle(document.documentElement);
-  function token(name) { return css.getPropertyValue(name).trim(); }
-  function colorOf(key) { return token("--c-" + key) || "#888888"; }
-
-  /* ---- wheel ---- */
-
-  var wheel = document.getElementById("wheel");
-  var wctx = wheel.getContext("2d");
-  var burst = document.getElementById("burst");
-  var bctx = burst.getContext("2d");
-  var stage = document.querySelector(".stage");
-
-  var size = 320;
-  var angle = randomUnit() * Math.PI * 2;
-
-  function fit() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var rect = stage.getBoundingClientRect();
-    size = Math.max(200, Math.round(rect.width));
-    [wheel, burst].forEach(function (c) {
-      c.width = Math.round(size * dpr);
-      c.height = Math.round(size * dpr);
-      c.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
-    });
-    drawWheel();
-  }
-
-  function drawWheel() {
-    var c = size / 2;
-    var r = c - 8;
-    wctx.clearRect(0, 0, size, size);
-
-    NAMES.forEach(function (n, i) {
-      var start = angle + i * SEG - Math.PI / 2;
-      wctx.beginPath();
-      wctx.moveTo(c, c);
-      wctx.arc(c, c, r, start, start + SEG);
-      wctx.closePath();
-      wctx.fillStyle = colorOf(n.key);
-      wctx.fill();
-
-      wctx.save();
-      wctx.translate(c, c);
-      wctx.rotate(start + SEG / 2);
-      wctx.textAlign = "right";
-      wctx.textBaseline = "middle";
-      wctx.fillStyle = "#FFFFFF";
-      wctx.font = "800 " + Math.round(size * 0.062) + "px 'Bricolage Grotesque', system-ui, sans-serif";
-      wctx.fillText(n.label, r - Math.round(size * 0.055), 0);
-      wctx.restore();
-    });
-
-    wctx.beginPath();
-    wctx.arc(c, c, r, 0, Math.PI * 2);
-    wctx.lineWidth = 6;
-    wctx.strokeStyle = token("--rim");
-    wctx.stroke();
-
-    wctx.beginPath();
-    wctx.arc(c, c, Math.max(20, size * 0.085), 0, Math.PI * 2);
-    wctx.fillStyle = token("--hub");
-    wctx.fill();
-    wctx.lineWidth = 3;
-    wctx.strokeStyle = token("--brass-edge");
-    wctx.stroke();
-  }
-
-  /* ---- confetti, in the winning name's colour ---- */
-
-  var bits = [];
-  var burstRunning = false;
-
-  function fireBurst(color) {
-    if (reducedMotion()) return;
-    bits = [];
-    for (var i = 0; i < 34; i++) {
-      var a = randomUnit() * Math.PI * 2;
-      var speed = 2.4 + randomUnit() * 4.4;
-      bits.push({
-        x: size / 2, y: size / 2,
-        vx: Math.cos(a) * speed,
-        vy: Math.sin(a) * speed - 2.2,
-        rot: randomUnit() * Math.PI,
-        vr: (randomUnit() - 0.5) * 0.34,
-        life: 1,
-        w: 4 + randomUnit() * 5,
-        h: 7 + randomUnit() * 7
+  function art(p) {
+    const [c1, c2] = p.colors;
+    const base = 220;
+    let blds = "";
+    if (p.villa) {
+      [30, 130, 230].forEach((x, i) => {
+        const hh = p.h[i];
+        blds += `<rect x="${x}" y="${base-hh}" width="80" height="${hh}" fill="${c1}"/>
+                 <path d="M${x-8} ${base-hh} L${x+40} ${base-hh-34} L${x+88} ${base-hh}Z" fill="${c2}"/>
+                 <rect x="${x+10}" y="${base-hh+14}" width="22" height="18" fill="#F1E6CF" opacity=".85"/>
+                 <rect x="${x+48}" y="${base-hh+14}" width="22" height="18" fill="#F1E6CF" opacity=".85"/>
+                 <rect x="${x+30}" y="${base-28}" width="20" height="28" fill="${c2}"/>`;
       });
-    }
-    if (!burstRunning) { burstRunning = true; stepBurst(color); }
-  }
-
-  function stepBurst(color) {
-    bctx.clearRect(0, 0, size, size);
-    var alive = false;
-    bctx.fillStyle = color;
-    bits.forEach(function (p) {
-      if (p.life <= 0) return;
-      alive = true;
-      p.vy += 0.17;
-      p.x += p.vx;
-      p.y += p.vy;
-      p.rot += p.vr;
-      p.life -= 0.016;
-      bctx.save();
-      bctx.globalAlpha = Math.max(0, p.life);
-      bctx.translate(p.x, p.y);
-      bctx.rotate(p.rot);
-      bctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-      bctx.restore();
-    });
-    if (alive) {
-      requestAnimationFrame(function () { stepBurst(color); });
     } else {
-      bctx.clearRect(0, 0, size, size);
-      burstRunning = false;
+      const xs = [40, 130, 230], ws = [80, 90, 80];
+      xs.forEach((x, i) => {
+        const hh = p.h[i];
+        blds += `<rect x="${x}" y="${base-hh}" width="${ws[i]}" height="${hh}" fill="${c1}" opacity="${i===1?1:.85}"/>
+                 <rect x="${x}" y="${base-hh}" width="${ws[i]}" height="${hh}" fill="url(#win)" opacity="${i===1?1:.7}"/>`;
+      });
+      blds += `<rect x="130" y="${base-p.h[1]-6}" width="90" height="6" fill="${c2}"/>`;
     }
+    return `<svg viewBox="0 0 350 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><linearGradient id="sky-${p.name.replace(/\s/g,'')}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${c2}" stop-opacity=".55"/><stop offset="1" stop-color="#F7F4EE"/></linearGradient></defs>
+      <rect width="350" height="240" fill="url(#sky-${p.name.replace(/\s/g,'')})"/>
+      <circle cx="290" cy="50" r="22" fill="#fff" opacity=".6"/>
+      ${blds}
+      <rect y="${base}" width="350" height="20" fill="${c1}" opacity=".9"/>
+      <circle cx="20" cy="${base-6}" r="16" fill="#3D7A5F"/><circle cx="335" cy="${base-4}" r="14" fill="#3D7A5F"/>
+    </svg>`;
   }
 
-  /* ---- scoreboard ---- */
+  const grid = document.getElementById("projGrid");
+  grid.innerHTML = projects.map(p => `
+    <article class="card reveal" data-status="${p.status}">
+      <div class="card-img">${art(p)}<span class="tag ${p.status==='completed'?'done':''}">${statusLabel[p.status]}</span></div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <div class="loc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>${p.loc} · ${p.type}</div>
+        <div class="specs"><span><b>${p.area}</b></span><span>Floors <b>${p.floors}</b></span></div>
+        <div class="card-foot">
+          <div class="price"><small>${p.status==='completed'?'Status':'Starting from'}</small>${p.price}</div>
+          <a href="#contact" class="link-arrow" data-project="${p.name}">Enquire
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </article>`).join("");
 
-  var board = document.getElementById("board");
-  var rows = {};
+  // Project dropdown
+  const sel = document.getElementById("project");
+  projects.filter(p => p.status !== "completed").forEach(p => sel.add(new Option(p.name, p.name)));
 
-  NAMES.forEach(function (n) {
-    var li = document.createElement("li");
-    li.className = "score";
-    li.innerHTML =
-      '<span class="dot"></span>' +
-      '<span class="who">' + n.label + '</span>' +
-      '<span class="tally">0</span>' +
-      '<span class="track"><span class="fill"></span></span>';
-    board.appendChild(li);
-    rows[n.key] = {
-      li: li,
-      tally: li.querySelector(".tally"),
-      fill: li.querySelector(".fill")
+  // Filters
+  const filters = document.querySelectorAll(".filter");
+  function applyFilter(f) {
+    filters.forEach(b => b.classList.toggle("active", b.dataset.filter === f));
+    grid.querySelectorAll(".card").forEach(c => c.classList.toggle("hide", f !== "all" && c.dataset.status !== f));
+  }
+  filters.forEach(b => b.addEventListener("click", () => applyFilter(b.dataset.filter)));
+  document.querySelectorAll("[data-jump]").forEach(a => a.addEventListener("click", () => applyFilter(a.dataset.jump)));
+
+  // Enquire buttons prefill project
+  grid.addEventListener("click", e => {
+    const a = e.target.closest("[data-project]");
+    if (a) sel.value = a.dataset.project;
+  });
+
+  // Header + mobile menu
+  const header = document.querySelector("header");
+  const onScroll = () => header.classList.toggle("scrolled", scrollY > 40);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  const menuBtn = document.querySelector(".menu-btn"), links = document.querySelector(".nav-links");
+  menuBtn.addEventListener("click", () => {
+    const open = links.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open);
+    if (open) header.classList.add("scrolled"); else onScroll();
+  });
+  links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { links.classList.remove("open"); menuBtn.setAttribute("aria-expanded", false); }));
+
+  // Reveal on scroll + counters
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add("in");
+    en.target.querySelectorAll("[data-count]").forEach(countUp);
+    io.unobserve(en.target);
+  }), { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  function countUp(el) {
+    const end = +el.dataset.count, suf = el.dataset.suffix || "", t0 = performance.now(), dur = 1400;
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur), v = Math.round(end * (1 - Math.pow(1 - k, 3)));
+      el.textContent = v.toLocaleString("en-IN") + suf;
+      if (k < 1) requestAnimationFrame(step);
     };
-  });
-
-  function renderBoard() {
-    var total = 0;
-    var peak = 0;
-    NAMES.forEach(function (n) {
-      total += counts[n.key];
-      peak = Math.max(peak, counts[n.key]);
-    });
-
-    NAMES.forEach(function (n) {
-      var row = rows[n.key];
-      var color = colorOf(n.key);
-      row.li.style.setProperty("--c", color);
-      row.li.style.setProperty("--flash", color + "22");
-      row.tally.textContent = counts[n.key];
-      row.fill.style.width = peak ? (counts[n.key] / peak * 100) + "%" : "0%";
-    });
-
-    document.getElementById("total").textContent =
-      total === 1 ? "1 spin" : total + " spins";
+    requestAnimationFrame(step);
   }
 
-  /* ---- spinning ---- */
-
-  var spinBtn = document.getElementById("spin");
-  var resultEl = document.getElementById("result");
-  var liveEl = document.getElementById("live");
-  var pointer = document.getElementById("pointer");
-  var spinning = false;
-
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3.2); }
-
-  function spin() {
-    if (spinning) return;
-    spinning = true;
-    spinBtn.disabled = true;
-    spinBtn.textContent = "Spinning...";
-    resultEl.classList.remove("pop");
-    NAMES.forEach(function (n) { rows[n.key].li.classList.remove("hit"); });
-
-    // 1. Draw the winner first, independently of everything that came before.
-    var pick = randomInt(NAMES.length);
-    var winner = NAMES[pick];
-
-    // 2. Then solve for the rotation that parks that wedge under the pointer.
-    //    A point drawn at local angle L sits under the pointer when L === -angle.
-    var within = 0.14 + randomUnit() * 0.72;
-    var target = (Math.PI * 2 - ((pick + within) * SEG)) % (Math.PI * 2);
-    var current = ((angle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-    var delta = (target - current + Math.PI * 2) % (Math.PI * 2);
-    var travel = (4 + randomInt(3)) * Math.PI * 2 + delta;
-    var from = angle;
-    var duration = reducedMotion() ? 320 : 3600 + randomUnit() * 900;
-    var t0 = null;
-
-    function frame(ts) {
-      if (t0 === null) t0 = ts;
-      var t = Math.min(1, (ts - t0) / duration);
-      angle = from + travel * easeOut(t);
-      drawWheel();
-      if (t < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        angle = from + travel;
-        drawWheel();
-        land(winner);
-      }
+  // Enquiry form (front-end only — connect to a backend/email service to receive leads)
+  const form = document.getElementById("enquiry"), note = document.getElementById("formNote");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = form.name.value.trim(), phone = form.phone.value.trim();
+    if (!name || !/^[0-9+\s-]{10,15}$/.test(phone)) {
+      note.style.background = "#FBE9E7"; note.style.color = "#A33A2B";
+      note.textContent = "Please enter your name and a valid phone number.";
+      note.classList.add("show"); return;
     }
-    requestAnimationFrame(frame);
-  }
-
-  function land(winner) {
-    counts[winner.key] += 1;
-    saveCounts();
-    renderBoard();
-
-    var color = colorOf(winner.key);
-    resultEl.style.setProperty("--win", color);
-    resultEl.innerHTML = "It&rsquo;s <strong>" + winner.label + "</strong>";
-    liveEl.textContent = winner.label + " was picked, and now has " +
-      counts[winner.key] + (counts[winner.key] === 1 ? " pick." : " picks.");
-
-    void resultEl.offsetWidth;
-    resultEl.classList.add("pop");
-    pointer.classList.remove("kick");
-    void pointer.offsetWidth;
-    pointer.classList.add("kick");
-    rows[winner.key].li.classList.add("hit");
-
-    fireBurst(color);
-
-    spinning = false;
-    spinBtn.disabled = false;
-    spinBtn.textContent = "Spin again";
-  }
-
-  spinBtn.addEventListener("click", spin);
-
-  document.getElementById("reset").addEventListener("click", function () {
-    memory = blank();
-    counts = memory;
-    saveCounts();
-    renderBoard();
-    NAMES.forEach(function (n) { rows[n.key].li.classList.remove("hit"); });
-    resultEl.style.removeProperty("--win");
-    resultEl.textContent = "Scores cleared. Ready when you are.";
-    liveEl.textContent = "Scores cleared.";
-    spinBtn.textContent = "Spin the wheel";
+    note.style.background = ""; note.style.color = "";
+    note.textContent = `Thank you, ${name}! Our team will contact you shortly.`;
+    note.classList.add("show"); form.reset();
   });
 
-  window.addEventListener("resize", fit);
-
-  var dark = window.matchMedia("(prefers-color-scheme: dark)");
-  function onThemeChange() {
-    css = getComputedStyle(document.documentElement);
-    drawWheel();
-    renderBoard();
-  }
-  if (dark.addEventListener) dark.addEventListener("change", onThemeChange);
-  else if (dark.addListener) dark.addListener(onThemeChange);
-
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () { drawWheel(); });
-  }
-
-  fit();
-  renderBoard();
-})();
+  document.getElementById("yr").textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
